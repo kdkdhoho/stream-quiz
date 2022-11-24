@@ -65,7 +65,11 @@ public class Quiz4 {
     }
 
     public boolean quiz5() {
-        return false;
+        long result = transactions.stream()
+                .map(transaction -> transaction.getTrader().getCity())
+                .filter(city -> city.equals("Busan"))
+                .count();
+        return result > 0;
     }
 
     public List<Integer> quiz6() {
