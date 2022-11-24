@@ -46,7 +46,12 @@ public class Quiz4 {
     }
 
     public List<Trader> quiz3() {
-        return Collections.emptyList();
+        return transactions.stream()
+                .map(transaction -> transaction.getTrader())
+                .filter(trader -> trader.getCity().equals("Seoul"))
+                .distinct()
+                .sorted(Comparator.comparing(Trader::getName))
+                .collect(Collectors.toList());
     }
 
     public String quiz4() {
