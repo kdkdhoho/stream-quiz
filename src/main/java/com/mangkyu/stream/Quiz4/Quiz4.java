@@ -55,7 +55,13 @@ public class Quiz4 {
     }
 
     public String quiz4() {
-        return null;
+        StringBuilder stringBuilder = new StringBuilder();
+        transactions.stream()
+                .map(transaction -> transaction.getTrader().getName())
+                .distinct()
+                .sorted(Comparator.naturalOrder())
+                .forEach(name -> stringBuilder.append("," + name));
+        return stringBuilder.delete(0, 1).toString();
     }
 
     public boolean quiz5() {
