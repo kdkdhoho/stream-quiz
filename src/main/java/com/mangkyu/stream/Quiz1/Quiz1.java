@@ -35,7 +35,19 @@ public class Quiz1 {
     }
 
     public int quiz3() throws IOException {
+        List<String[]> csvLines = readCsvLines();
+        final String regex = "좋아";
+        AtomicInteger count = new AtomicInteger();
 
+        csvLines.stream().map(line -> line[2].trim())
+                .forEach(data -> count.getAndAdd(countWithRegex(data, regex)));
+
+        return count.get() / regex.length();
+    }
+
+    private int countWithRegex(String data, String regex) {
+        String afterData = data.replace(regex, "");
+        return data.length() - afterData.length();
     }
 
     private List<String[]> readCsvLines() throws IOException {
