@@ -45,46 +45,44 @@ public class Quiz4 {
 
     public List<Trader> quiz3() {
         return transactions.stream()
-                .map(transaction -> transaction.getTrader())
-                .filter(trader -> trader.getCity().equals("Seoul"))
+                .map(Transaction::getTrader)
                 .distinct()
+                .filter(trader -> trader.getCity().equals("Seoul"))
                 .sorted(Comparator.comparing(Trader::getName))
                 .collect(Collectors.toList());
     }
 
     public String quiz4() {
-        StringBuilder stringBuilder = new StringBuilder();
-        transactions.stream()
+        return transactions.stream()
                 .map(transaction -> transaction.getTrader().getName())
                 .distinct()
-                .sorted(Comparator.naturalOrder())
-                .forEach(name -> stringBuilder.append("," + name));
-        return stringBuilder.delete(0, 1).toString();
+                .sorted()
+                .collect(Collectors.joining(","));
     }
 
     public boolean quiz5() {
-        long result = transactions.stream()
+        return transactions.stream()
                 .map(transaction -> transaction.getTrader().getCity())
-                .filter(city -> city.equals("Busan"))
-                .count();
-        return result > 0;
+                .anyMatch(city -> city.equals("Busan"));
     }
 
     public List<Integer> quiz6() {
         return transactions.stream()
                 .filter(transaction -> transaction.getTrader().getCity().equals("Seoul"))
-                .map(transaction -> transaction.getValue())
+                .map(Transaction::getValue)
                 .collect(Collectors.toList());
     }
 
     public Integer[] quiz7() {
         int max = transactions.stream()
                 .mapToInt(transactions -> transactions.getValue())
-                .reduce(Integer::max).getAsInt();
+                .reduce(Integer::max)
+                .getAsInt();
 
         int min = transactions.stream()
                 .mapToInt(transactions -> transactions.getValue())
-                .min().getAsInt();
+                .min()
+                .getAsInt();
 
         return new Integer[]{max, min};
     }
