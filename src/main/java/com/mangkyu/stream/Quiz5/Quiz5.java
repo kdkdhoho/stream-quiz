@@ -2,6 +2,7 @@ package com.mangkyu.stream.Quiz5;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Quiz5 {
@@ -15,7 +16,10 @@ public class Quiz5 {
     }
 
     public int quiz2() {
-        return 0;
+        return Arrays.stream(STRING_ARR)
+                .mapToInt(str -> str.length())
+                .max()
+                .orElse(-1);
     }
 
     public List<Integer> quiz3() {
