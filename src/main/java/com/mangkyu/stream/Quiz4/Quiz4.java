@@ -1,11 +1,9 @@
 package com.mangkyu.stream.Quiz4;
 
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Quiz4 {
 
@@ -80,7 +78,15 @@ public class Quiz4 {
     }
 
     public Integer[] quiz7() {
-        return new Integer[]{0, 0};
+        int max = transactions.stream()
+                .mapToInt(transactions -> transactions.getValue())
+                .reduce(Integer::max).getAsInt();
+
+        int min = transactions.stream()
+                .mapToInt(transactions -> transactions.getValue())
+                .min().getAsInt();
+
+        return new Integer[]{max, min};
     }
 
 }
