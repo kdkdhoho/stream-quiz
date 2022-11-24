@@ -16,7 +16,8 @@ public class Quiz1 {
         List<String[]> csvLines = readCsvLines();
         Map<String, Integer> result = new HashMap<>();
 
-        csvLines.stream().map(line -> line[1].trim())
+        csvLines.stream()
+                .map(line -> line[1].trim())
                 .map(line -> line.split(":"))
                 .flatMap(Arrays::stream)
                 .forEach(hobby -> result.put(hobby, result.getOrDefault(hobby, 0) + 1));
@@ -27,7 +28,8 @@ public class Quiz1 {
         List<String[]> csvLines = readCsvLines();
         Map<String, Integer> result = new HashMap<>();
 
-        csvLines.stream().filter(line -> line[0].startsWith("정"))
+        csvLines.stream()
+                .filter(line -> line[0].startsWith("정"))
                 .map(line -> line[1].trim().split(":"))
                 .flatMap(Arrays::stream)
                 .forEach(hobby -> result.put(hobby, result.getOrDefault(hobby, 0) + 1));
@@ -39,7 +41,8 @@ public class Quiz1 {
         final String regex = "좋아";
         AtomicInteger count = new AtomicInteger();
 
-        csvLines.stream().map(line -> line[2].trim())
+        csvLines.stream()
+                .map(line -> line[2].trim())
                 .forEach(data -> count.getAndAdd(countWithRegex(data, regex)));
 
         return count.get() / regex.length();
