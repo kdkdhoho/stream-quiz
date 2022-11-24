@@ -39,7 +39,10 @@ public class Quiz4 {
     }
 
     public List<String> quiz2() {
-        return Collections.emptyList();
+        return transactions.stream()
+                .map(transaction -> transaction.getTrader().getCity())
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     public List<Trader> quiz3() {
