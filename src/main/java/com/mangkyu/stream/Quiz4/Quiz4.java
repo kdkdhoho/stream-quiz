@@ -73,7 +73,10 @@ public class Quiz4 {
     }
 
     public List<Integer> quiz6() {
-        return Collections.emptyList();
+        return transactions.stream()
+                .filter(transaction -> transaction.getTrader().getCity().equals("Seoul"))
+                .map(transaction -> transaction.getValue())
+                .collect(Collectors.toList());
     }
 
     public Integer[] quiz7() {
