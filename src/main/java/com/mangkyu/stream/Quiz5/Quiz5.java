@@ -31,7 +31,11 @@ public class Quiz5 {
     }
 
     public List<Integer[]> quiz4() {
-        return Collections.emptyList();
+        return IntStream.rangeClosed(1, 6)
+                .boxed()
+                .flatMap(num1 -> IntStream.rangeClosed(1, 6).boxed().map(num2 -> new Integer[]{num1, num2}))
+                .filter(arr -> arr[0] + arr[1] == 6)
+                .collect(Collectors.toList());
     }
 
 }
